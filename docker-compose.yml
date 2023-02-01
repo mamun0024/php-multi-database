@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+    webserver:
+        build: docker/bin/webserver
+        ports: 
+            - "8009:80"
+        volumes:
+            - .:/var/www/html/
+        networks:
+            - default
+            
+    mysql:
+        build: docker/bin/mysql
+        container_name: 'png-mysql-test'
+        # restart: always
+        ports:
+            - "3306:3306"
+        volumes:
+            - ${MYSQL_DATA_DIR-./docker/data/mysql}:/var/lib/mysql
+            - ${MYSQL_LOG_DIR-./docker/logs/mysql}:/var/log/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: php_task_1
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+
+    phpmyadmin:
+        build: docker/bin/phpmyadmin
+        links:
+            - mysql
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+        ports:
+            - '8010:80'
+        volumes:
+            - /docker/sessions
+
+
