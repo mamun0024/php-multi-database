@@ -2,28 +2,29 @@
 
 namespace App;
 
+use App\Database\Database;
+use PDO;
+
 class Application
 {
     /**
-     * @var array<string, mixed>
+     * @var Database
      */
-    private array $databaseSettings;
+    private Database $database;
 
     /**
-     * @param array<string, array<string, array<string, mixed>>> $settings
+     * @param array<string, array<string, array<string, mixed>>> $config
      */
-    public function __construct(array $settings = [])
+    public function __construct(array $config = [])
     {
-        $this->databaseSettings = $settings['settings']['db'];
+        $this->database = new Database($config['settings']['db']);
     }
 
     /**
-     * Run the app.
-     *
-     * @return array<string, mixed>
+     * @return PDO
      */
-    public function run(): array
+    public function run(): PDO
     {
-        return $this->databaseSettings;
+        return $this->database->getConnection();
     }
 }

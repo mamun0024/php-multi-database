@@ -1,24 +1,17 @@
 <?php
 
-require_once 'vendor/autoload.php';
-
 use App\Application;
 
-$dot_env = Dotenv\Dotenv::createMutable(__DIR__);
-$dot_env->load();
+require 'vendor/autoload.php';
 
-$app = new Application([
-    'settings' => [
-        'db' => [
-            'driver'   => $_ENV['DB_DRIVER'],
-            'host'     => $_ENV['DB_HOST'],
-            'port'     => $_ENV['DB_PORT'],
-            'database' => $_ENV['DB_DATABASE'],
-            'user'     => $_ENV['DB_USER'],
-            'password' => $_ENV['DB_PASSWORD'],
-        ],
-    ],
-]);
+const DOCUMENT_ROOT = __DIR__;
+
+$dotEnv = Dotenv\Dotenv::createMutable(DOCUMENT_ROOT);
+$dotEnv->load();
+
+$config = require DOCUMENT_ROOT . '/app/config.php';
+
+$app = new Application($config);
 
 echo "<pre>";
 print_r($app->run());
