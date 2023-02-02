@@ -5,3 +5,4 @@ docker/sessions
 docker/data/mysql
 docker/logs/mysql
 /log/app.log
+.phpunit.result.cache

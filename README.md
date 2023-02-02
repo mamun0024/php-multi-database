@@ -26,3 +26,4 @@ Docker configuration for Apache, PHP 7.4, MySQL 8 and phpmyadmin.
 2. *composer require --dev phpunit/phpunit*
 3. *composer require --dev squizlabs/php_codesniffer*
 4. *composer require --dev phpstan/phpstan*
+5. *composer require --dev mockery/mockery*
