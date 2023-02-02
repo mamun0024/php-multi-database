@@ -10,13 +10,16 @@ Docker configuration for Apache, PHP 7.4, MySQL 8 and phpmyadmin.
 7. Run: docker compose up -d
 8. Run: docker compose down
 
-#### Phpmyadmin
-1. Username: user
-2. Password: password
-
 #### Link
 1. Webserver: 0.0.0.0:8009
 2. Phpmyadmin: 0.0.0.0:8010
+
+#### Phpmyadmin credentials
+1. Username: user
+2. Password: password
+
+# Action points
+1. Execute **sql/php_task_1.sql** in phpMyAdmin
 
 # Used libraries
 1. *composer require vlucas/phpdotenv*

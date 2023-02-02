@@ -2,14 +2,16 @@
 
 namespace App\Database;
 
+use App\Contracts\DatabaseConnectionInterface;
 use App\Logger;
 use PDO;
 use PDOException;
+use PDOStatement;
 
 /**
  * Class Database
  */
-class Database
+class Database implements DatabaseConnectionInterface
 {
     /**
      * @var PDO
@@ -39,6 +41,22 @@ class Database
             Logger::log("Failed to connect to DB: " . $e->getMessage(), Logger::ERROR);
             exit();
         }
+    }
+
+    /**
+     * @param string                      $query
+     * @param array<array<string, mixed>> $data
+     *
+     * @return PDOStatement
+     */
+    public function prepareStatement(string $query, array $data = []): PDOStatement
+    {
+        $statement = $this->getConnection()->prepare($query);
+        foreach ($data as $item) {
+            $statement->bindParam(':' . $item['field'], $item['value']);
+        }
+
+        return $statement;
     }
 
     /**

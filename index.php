@@ -13,6 +13,4 @@ $config = require DOCUMENT_ROOT . '/app/config.php';
 
 $app = new Application($config);
 
-echo "<pre>";
-print_r($app->run());
-echo "</pre>";
+$app->run();
