@@ -13,12 +13,9 @@ class Application
      */
     private array $config;
 
-    /**
-     * @param array<string, array<string, array<string, mixed>>> $config
-     */
-    public function __construct(array $config)
+    public function __construct()
     {
-        $this->config = $config;
+        $this->config = Config::getConfig();
     }
 
     /**

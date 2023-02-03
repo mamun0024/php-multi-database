@@ -19,7 +19,7 @@ class Logger
 
     private function __construct()
     {
-        $this->config = require DOCUMENT_ROOT . '/app/config.php';
+        $this->config = Config::getConfig();
     }
 
     /**
