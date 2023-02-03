@@ -8,13 +8,12 @@ namespace App\Exceptions;
 class SqlQueryBuilderException extends BaseException
 {
     /**
-     * @param string   $errorMessage
-     * @param int|null $errorCode
+     * @param string|null $errorMessage
      *
      * @return string
      */
-    protected function errorMessage(string $errorMessage, int $errorCode = null): string
+    public function errorMessage(string $errorMessage = null): string
     {
-        return $this->errorMessageFormat($errorMessage, $errorCode);
+        return $this->errorMessageFormat($errorMessage);
     }
 }

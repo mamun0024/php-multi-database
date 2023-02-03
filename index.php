@@ -4,9 +4,7 @@ use App\Application;
 
 require 'vendor/autoload.php';
 
-const DOCUMENT_ROOT = __DIR__;
-
-$dotEnv = Dotenv\Dotenv::createMutable(DOCUMENT_ROOT);
+$dotEnv = Dotenv\Dotenv::createMutable(__DIR__);
 $dotEnv->load();
 
 $app = new Application();

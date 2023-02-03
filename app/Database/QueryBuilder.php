@@ -29,6 +29,7 @@ class QueryBuilder implements SqlQueryBuilderInterface
     public function __construct(DatabaseConnectionInterface $databaseConnector)
     {
         $this->databaseConnector = $databaseConnector;
+        $this->query             = new stdClass();
     }
 
     protected function newQuery(): void
@@ -167,7 +168,7 @@ class QueryBuilder implements SqlQueryBuilderInterface
         if (!empty($where)) {
             $query      .= ' WHERE ';
             $conditions = [];
-            foreach ($this->query->where as $key) {
+            foreach ($where as $key) {
                 $conditions[] = $key['field'] . ' ' . $key['operator'] . ' :' . $key['field'];
             }
             $query .= implode(" AND ", $conditions);

@@ -10,16 +10,13 @@ use Exception;
 class BaseException extends Exception
 {
     /**
-     * @param string   $errorMessage
-     * @param int|null $errorCode
+     * @param string|null $errorMessage
      *
      * @return string
      */
-    protected function errorMessageFormat(string $errorMessage, int $errorCode = null): string
+    protected function errorMessageFormat(string $errorMessage = null): string
     {
-        $errorCode = $errorCode ?? $this->getCode();
-
-        return 'Exception : Error on line ' . $this->getLine() . ' in ' .
-            $this->getFile() . ' : ' . $errorMessage . ', Code: ' . $errorCode;
+        return 'Exception : Error on line ' . $this->getLine() . ' in '
+            . $this->getFile() . ' : ' . $errorMessage;
     }
 }

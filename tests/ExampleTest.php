@@ -1,13 +1,27 @@
 <?php
 
-namespace Test;
+namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 
 class ExampleTest extends TestCase
 {
-    public function testBehaviour(): void
+    public function testStub(): void
     {
-        $this->assertTrue(true);
+        $stub = $this->createStub(SomeClass::class);
+
+        $stub->method('doSomething')
+             ->willReturn('foo');
+
+        $this->assertSame('foo', $stub->doSomething());
     }
 }
+
+class SomeClass
+{
+    public function doSomething(): string
+    {
+        return 'foo';
+    }
+}
+
