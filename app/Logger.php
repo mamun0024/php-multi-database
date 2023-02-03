@@ -56,6 +56,6 @@ class Logger
      */
     public static function log(string $message, string $type = self::INFO): void
     {
-        self::getInstance()->writeToFile("[" . date('Y-m-d H:i:s') . "] [$type] :: $message" . PHP_EOL);
+        self::getInstance()->writeToFile("[" . date('Y-m-d H:i:s') . "] [$type] :: $message \n" . PHP_EOL);
     }
 }

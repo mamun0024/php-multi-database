@@ -9,9 +9,9 @@ use PDOException;
 use PDOStatement;
 
 /**
- * Class Database
+ * Class MySqlDatabase
  */
-class Database implements DatabaseConnectionInterface
+class MySqlDatabase implements DatabaseConnectionInterface
 {
     /**
      * @var PDO
@@ -38,7 +38,7 @@ class Database implements DatabaseConnectionInterface
             );
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            Logger::log("Failed to connect to DB: " . $e->getMessage(), Logger::ERROR);
+            Logger::log($e, Logger::ERROR);
             exit();
         }
     }

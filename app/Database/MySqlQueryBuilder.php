@@ -9,9 +9,9 @@ use PDO;
 use stdClass;
 
 /**
- * Class QueryBuilder
+ * Class MySqlQueryBuilder
  */
-class QueryBuilder implements SqlQueryBuilderInterface
+class MySqlQueryBuilder implements SqlQueryBuilderInterface
 {
     /**
      * @var DatabaseConnectionInterface

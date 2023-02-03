@@ -2,29 +2,29 @@
 
 namespace Tests;
 
-use App\Database\Database;
-use App\Database\QueryBuilder;
+use App\Database\MySqlDatabase;
+use App\Database\MySqlQueryBuilder;
 use App\Exceptions\SqlQueryBuilderException;
 use PHPUnit\Framework\TestCase;
 
-class QueryBuilderTest extends TestCase
+class MySqlQueryBuilderTest extends TestCase
 {
     use MockTrait;
 
     /**
-     * @var QueryBuilder
+     * @var MySqlQueryBuilder
      */
-    private QueryBuilder $queryBuilder;
+    private MySqlQueryBuilder $queryBuilder;
 
     /**
-     * @var Database
+     * @var MySqlDatabase
      */
-    protected Database $databaseMock;
+    protected MySqlDatabase $databaseMock;
 
     protected function setUp(): void
     {
-        $this->databaseMock = $this->createMock(Database::class);
-        $this->queryBuilder = new QueryBuilder($this->databaseMock);
+        $this->databaseMock = $this->createMock(MySqlDatabase::class);
+        $this->queryBuilder = new MySqlQueryBuilder($this->databaseMock);
     }
 
     public function testSelectErrorCheck(): void
@@ -33,8 +33,8 @@ class QueryBuilderTest extends TestCase
             $this->queryBuilder->select('users', []);
         } catch (SqlQueryBuilderException $e) {
             $this->assertStringContainsString(
-                'Exception : Error',
-                $e->errorMessage()
+                'Columns selection is mandatory for SELECT',
+                $e->getMessage()
             );
         }
     }
@@ -45,8 +45,8 @@ class QueryBuilderTest extends TestCase
             $this->queryBuilder->where('id', '68c68470-f25f-4ce4-bbf4-05f50bd82fc4');
         } catch (SqlQueryBuilderException $e) {
             $this->assertStringContainsString(
-                'Exception : Error',
-                $e->errorMessage()
+                'WHERE can only be added to SELECT, UPDATE OR DELETE',
+                $e->getMessage()
             );
         }
     }
@@ -57,8 +57,8 @@ class QueryBuilderTest extends TestCase
             $this->queryBuilder->insert('users', []);
         } catch (SqlQueryBuilderException $e) {
             $this->assertStringContainsString(
-                'Exception : Error',
-                $e->errorMessage()
+                'DATA is mandatory for INSERT',
+                $e->getMessage()
             );
         }
     }
@@ -69,8 +69,8 @@ class QueryBuilderTest extends TestCase
             $this->queryBuilder->findOne();
         } catch (SqlQueryBuilderException $e) {
             $this->assertStringContainsString(
-                'Exception : Error',
-                $e->errorMessage()
+                'findOne() can only be used after SELECT',
+                $e->getMessage()
             );
         }
     }
@@ -81,15 +81,15 @@ class QueryBuilderTest extends TestCase
             $this->queryBuilder->get();
         } catch (SqlQueryBuilderException $e) {
             $this->assertStringContainsString(
-                'Exception : Error',
-                $e->errorMessage()
+                'get() can only be used after SELECT',
+                $e->getMessage()
             );
         }
     }
 
     public function testInsertData(): void
     {
-        $queryBuilderMock = $this->createMock(QueryBuilder::class);
+        $queryBuilderMock = $this->createMock(MySqlQueryBuilder::class);
 
         $this->setMock($queryBuilderMock, 'insert', true);
 
@@ -111,7 +111,7 @@ class QueryBuilderTest extends TestCase
             'name' => 'Johny Bravo',
         ];
 
-        $queryBuilderMock = $this->createMock(QueryBuilder::class);
+        $queryBuilderMock = $this->createMock(MySqlQueryBuilder::class);
 
         $this->setMock($queryBuilderMock, 'select', $queryBuilderMock);
         $this->setMock($queryBuilderMock, 'findOne', $data);
@@ -134,7 +134,7 @@ class QueryBuilderTest extends TestCase
             ]
         ];
 
-        $queryBuilderMock = $this->createMock(QueryBuilder::class);
+        $queryBuilderMock = $this->createMock(MySqlQueryBuilder::class);
 
         $this->setMock($queryBuilderMock, 'select', $queryBuilderMock);
         $this->setMock($queryBuilderMock, 'get', $data);

@@ -2,18 +2,18 @@
 
 namespace Tests;
 
-use App\Database\Database;
+use App\Database\MySqlDatabase;
 use PDO;
 use PDOStatement;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class DatabaseTest extends TestCase
+class MySqlDatabaseTest extends TestCase
 {
     /**
-     * @var Database
+     * @var MySqlDatabase
      */
-    protected Database $databaseMock;
+    protected MySqlDatabase $databaseMock;
 
     /**
      * @var PDOStatement|MockObject
@@ -27,7 +27,7 @@ class DatabaseTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->databaseMock  = $this->createMock(Database::class);
+        $this->databaseMock  = $this->createMock(MySqlDatabase::class);
         $this->statementMock = $this->createMock(PDOStatement::class);
         $this->pdoMock       = $this->createMock(PDO::class);
     }

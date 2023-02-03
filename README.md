@@ -5,7 +5,6 @@ Docker configuration for Apache, PHP 7.4, MySQL 8 and phpmyadmin.
 2. Create **docker/sessions** folder
 3. Create **docker/data/mysql** folder
 4. Create **docker/logs/mysql** folder
-5. Create **log** folder
 6. Run: docker compose build
 7. Run: docker compose up -d
 8. Run: docker compose down
