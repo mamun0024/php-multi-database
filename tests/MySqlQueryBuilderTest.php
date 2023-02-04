@@ -21,12 +21,18 @@ class MySqlQueryBuilderTest extends TestCase
      */
     protected MySqlDatabase $databaseMock;
 
+    /**
+     * @return void
+     */
     protected function setUp(): void
     {
         $this->databaseMock = $this->createMock(MySqlDatabase::class);
         $this->queryBuilder = new MySqlQueryBuilder($this->databaseMock);
     }
 
+    /**
+     * @return void
+     */
     public function testSelectErrorCheck(): void
     {
         try {
@@ -39,6 +45,9 @@ class MySqlQueryBuilderTest extends TestCase
         }
     }
 
+    /**
+     * @return void
+     */
     public function testWhereErrorCheck(): void
     {
         try {
@@ -51,6 +60,9 @@ class MySqlQueryBuilderTest extends TestCase
         }
     }
 
+    /**
+     * @return void
+     */
     public function testInsertErrorCheck(): void
     {
         try {
@@ -63,6 +75,9 @@ class MySqlQueryBuilderTest extends TestCase
         }
     }
 
+    /**
+     * @return void
+     */
     public function testFindOneErrorCheck(): void
     {
         try {
@@ -75,6 +90,9 @@ class MySqlQueryBuilderTest extends TestCase
         }
     }
 
+    /**
+     * @return void
+     */
     public function testGetErrorCheck(): void
     {
         try {
@@ -87,6 +105,10 @@ class MySqlQueryBuilderTest extends TestCase
         }
     }
 
+    /**
+     * @return void
+     * @throws SqlQueryBuilderException
+     */
     public function testInsertData(): void
     {
         $queryBuilderMock = $this->createMock(MySqlQueryBuilder::class);
@@ -104,6 +126,10 @@ class MySqlQueryBuilderTest extends TestCase
         $this->assertEquals(true, $result);
     }
 
+    /**
+     * @return void
+     * @throws SqlQueryBuilderException
+     */
     public function testFindOneDataFetch(): void
     {
         $data = [
@@ -121,6 +147,10 @@ class MySqlQueryBuilderTest extends TestCase
         $this->assertEquals($data, $result);
     }
 
+    /**
+     * @return void
+     * @throws SqlQueryBuilderException
+     */
     public function testGetDataFetch(): void
     {
         $data = [

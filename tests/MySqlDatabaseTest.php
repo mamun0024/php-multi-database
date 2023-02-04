@@ -25,6 +25,9 @@ class MySqlDatabaseTest extends TestCase
      */
     protected $pdoMock;
 
+    /**
+     * @return void
+     */
     protected function setUp(): void
     {
         $this->databaseMock  = $this->createMock(MySqlDatabase::class);
@@ -32,6 +35,9 @@ class MySqlDatabaseTest extends TestCase
         $this->pdoMock       = $this->createMock(PDO::class);
     }
 
+    /**
+     * @return void
+     */
     public function testConnection(): void
     {
         // @phpstan-ignore-next-line
@@ -43,6 +49,9 @@ class MySqlDatabaseTest extends TestCase
         );
     }
 
+    /**
+     * @return void
+     */
     public function testPrepareStatement(): void
     {
         // @phpstan-ignore-next-line
